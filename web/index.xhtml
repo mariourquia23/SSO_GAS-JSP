@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>GOanySSO</title>
+
+        <style type="text/css">
+            /* Basics */
+            html, body {
+                margin:0;
+                padding:0;
+                height: 100%;
+                font-family: "Helvetica Neue", Helvetica, sans-serif;
+                color: #444;
+                -webkit-font-smoothing: antialiased;
+                background: #fff;
+            }
+
+            #PanelPadre {
+
+            }
+
+            #panel {
+                position:absolute;
+                left:50%;
+                top:50%;
+                height: 350px;
+                width: 340px;
+                margin-top:-150px;
+                margin-left:-170px;
+                overflow:hidden;
+                /*border: 2px solid Red;*/
+                text-align: center;
+
+            }
+
+            #container {
+                width: 335px;
+                height: 210px;
+                background-color: #f3f8ff;
+                border: 1px solid #93b8d8;
+                border-radius: 3px;
+                /*box-shadow: 0 1px 2px rgba(0, 0, 0, .1);*/
+                text-align: left;
+                box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
+            }
+
+            form {
+                margin: 0 auto;
+                margin-top: 0px;
+            }
+
+            label {
+                color: #555;
+                display: inline-block;
+                margin-left: 18px;
+                padding-top: 10px;
+                font-size: 14px;
+            }
+
+            p a {
+                font-size: 11px;
+                color: #aaa;
+                float: right;
+                margin-top: -13px;
+                margin-right: 20px;
+                -webkit-transition: all .4s ease;
+                -moz-transition: all .4s ease;
+                transition: all .4s ease;
+            }
+
+            p a:hover {
+                color: #555;
+            }
+
+            input {
+                font-family: "Helvetica Neue", Helvetica, sans-serif;
+                font-size: 22px;
+                outline: none;
+            }
+
+            input[type=text],
+            input[type=password] {
+                color: #777;
+                padding-left: 10px;
+                margin-right: 5px;
+                margin-top: 7px;
+                margin-left: 18px;
+                width: 280px;
+                height: 35px;
+                border: 1px solid #c7d0d2;
+                border-radius: 2px;
+                box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;
+                -webkit-transition: all .4s ease;
+                -moz-transition: all .4s ease;
+                transition: all .4s ease;
+            }
+
+            input[type=text]:hover,
+            input[type=password]:hover {
+                border: 1px solid #b6bfc0;
+                box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .7), 0 0 0 5px #f5f7f8;
+            }
+
+            input[type=text]:focus,
+            input[type=password]:focus {
+                border: 1px solid #a8c9e4;
+                box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #e6f2f9;
+            }
+
+            #lower {
+                background: #ecf2f5;
+                width: 100%;
+                height: 69px;
+                margin-top: 20px;
+                box-shadow: inset 0 1px 1px #fff;
+                border-top: 1px solid #ccc;
+                border-bottom-right-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+
+            input[type=checkbox] {
+                margin-left: 20px;
+                margin-top: 30px;
+            }
+
+            .check {
+                margin-left: 3px;
+                font-size: 11px;
+                color: #444;
+                text-shadow: 0 1px 0 #fff;
+            }
+
+            input[type=submit] {
+                float: right;
+                margin-right: 15px;
+                margin-top: 10px;
+                width: 100px;
+                height: 30px;
+                font-size: 14px;
+                font-weight: bold;
+                color: #fff;
+                background-color: #acd6ef; /*IE fallback*/
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#acd6ef), to(#6ec2e8));
+                background-image: -moz-linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
+                background-image: linear-gradient(top left 90deg, #acd6ef 0%, #6ec2e8 100%);
+                border: 1px solid #66add6;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+                cursor: pointer;
+            }
+
+            input[type=submit]:hover {
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#b6e2ff), to(#6ec2e8));
+                background-image: -moz-linear-gradient(top left 90deg, #b6e2ff 0%, #6ec2e8 100%);
+                background-image: linear-gradient(top left 90deg, #b6e2ff 0%, #6ec2e8 100%);
+            }
+
+            input[type=submit]:active {
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#6ec2e8), to(#b6e2ff));
+                background-image: -moz-linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
+                background-image: linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
+            }
+            .modal
+            {
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: black;
+                z-index: 99;
+                opacity: 0.8;
+                filter: alpha(opacity=80);
+                -moz-opacity: 0.8;
+                min-height: 100%;
+                width: 100%;
+            }
+            .loading {
+                font-family: Arial;
+                font-size: 10pt;
+                /*border: 5px solid #67CFF5;
+                  border: 1px solid #93b8d8;  
+                box-shadow: inset 0 1.5px 3px rgba(190, 190, 190, .4), 0 0 0 5px #f5f7f8;*/
+                border: 3px solid #93b8d8; 
+                width: 200px;
+                height: 100px;
+                display: none;
+                position: fixed;
+                background-color: #f3f8ff;
+                border-radius:3px;
+                z-index: 999;
+            }
+
+
+        </style>
+        <script type="text/javascript">
+            function validateForm() {
+            var x = document.forms["Name"]["username"].value;
+            var y = document.forms["Name"]["token"].value;
+                if (x == null || x == "" || y == null || y == "" ) {
+                        alert("Favor llenar todos los campos.");
+                        return false;
+                        }
+        }
+        </script>
+    </head>
+    <body>
+        <form name="Name" action="response.jsp" onsubmit="return validateForm()" method="post">
+            <div id="PanelPadre">
+                <div id="panel">
+                    <img src="img/logo.png" width="70" height="70" alt="logo"/>                    
+                    <br />
+                    <br />
+                    <div id="container">
+                        <table cellpadding="1" cellspacing="0" style="border-collapse: collapse;">
+                            <tr>
+                                <td>
+                                    <table cellpadding="0">
+                                        <tr>
+                                            <td>
+                                                    
+                                                <Label ID="UserNameLabel"  AssociatedControlID="UserName">Usuario</Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: Red;">
+                                                <input type="text" name="username" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <Label ID="PasswordLabel">Token</Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: Red;">
+                                                <input type="password" name="token" />
+
+                                            </td>
+                                        </tr>
+
+                                        <tr id="trbutton">
+
+                                            <td>
+                                                <input type="submit" value="Enviar"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <br />
+                                            </td>
+                                        </tr>
+                                        <tr id="trerr">
+                                            <td align="center" style="color: Red;">
+                                                <br />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

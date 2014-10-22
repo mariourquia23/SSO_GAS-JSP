@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://74.208.202.242:8050/emulacionRSA.asmx" uri="src/conf/xml-resources/web-service-references/emulacionRSA/wsdl/74.208.202.242_8050/emulacionRSA.asmx"/>
+    <system systemId="http://74.208.202.242:8050/emulacionRSA.asmx?wsdl" uri="src/conf/xml-resources/web-service-references/emulacionRSA/wsdl/74.208.202.242_8050/emulacionRSA.asmx.wsdl"/>
+</catalog>
