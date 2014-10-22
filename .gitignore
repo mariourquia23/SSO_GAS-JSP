@@ -1,0 +1,4 @@
+web/WEB-INF/wsdl.zip
+build/web/WEB-INF/wsdl.zip
+lib/gaservices_classes.jar
+build/web/WEB-INF/lib/gaservices_classes.jar

@@ -5,6 +5,7 @@
  */
 package com.Greenlt.SSO_GAS;
 
+import com.linoma.dpa.util.GASFileUtilities;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -218,8 +219,8 @@ public class SSO_GLT {
     private void LoadPropertiesFile(){        
         InputStream input=null;        
         try {
-            
-            input=new FileInputStream("C:\\Users\\JoseMario\\Documents\\NetBeansProjects\\SSO_GAS\\web\\conf\\SSOconfig.properties");
+            input=new FileInputStream(GASFileUtilities.resolveFile("userdata/greenltsso/SSOconfig.properties"));
+            //input=new FileInputStream("C:\\Users\\JoseMario\\Documents\\NetBeansProjects\\SSO_GAS\\web\\conf\\SSOconfig.properties");
             prop.load(input);   
              
         } catch (IOException ex) {
