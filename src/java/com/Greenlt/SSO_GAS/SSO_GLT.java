@@ -24,7 +24,6 @@ import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
-import java.util.Properties;
 import java.util.logging.Logger;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -32,9 +31,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.io.OutputStream;
 import java.util.Properties;
-import java.io.FileOutputStream;
 /**
  *
  * @author JoseMario
@@ -47,19 +44,25 @@ public class SSO_GLT {
     private String JsessionID;
     private Logger logger = Logger.getLogger(this.getClass().getName());
     Properties prop=new Properties();
-
-    public SSO_GLT(String username, String token) {
+    private URL RequestUrl=null;
+/*
+    public SSO_GLT(String username, String conToken) {
         this.user = username.trim();
-        this.token = token.trim();
+        this.token = conToken.trim();
         LoadPropertiesFile();
-    }
-    public SSO_GLT(String username, String password, boolean p){
+    }*/
+    public SSO_GLT(String username, String passwordOToken, boolean conPassword){
         this.user=username.trim();
-        this.pass=password.trim();
+        if (conPassword==true){
+        this.pass=passwordOToken.trim();
         this.token="";
+        }else 
+        {
+            this.token = passwordOToken.trim();
+        }
         LoadPropertiesFile();
     }
-
+    
     public Boolean autenticarRSAWSDL() {
         //GLT
         com.Greenlt.SSO_GAS.EmulacionRSA service = new com.Greenlt.SSO_GAS.EmulacionRSA();
@@ -122,11 +125,10 @@ public class SSO_GLT {
         HttpsURLConnection conn = null;
         URL webClient;
         try {
-
             //Aceptar todos los certificados
             disableSslVerification();
             String authCredential = String.format("username=%s&password=%s", this.user, this.pass);
-            webClient = new URL(getProperty("GoAnyWhere_LoginURL"));//"https://labsserver:4331/login"
+            webClient =(RequestUrl==null)? new URL(getProperty("GoAnyWhere_LoginURL")):RequestUrl;//"https://labsserver:4331/login"
             conn = (HttpsURLConnection) webClient.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -201,8 +203,7 @@ public class SSO_GLT {
 
             // Install the all-trusting host verifier
             HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-        } catch (NoSuchAlgorithmException e) {
-            
+        } catch (NoSuchAlgorithmException e) {            
             e.printStackTrace();
         } catch (KeyManagementException e) {
             e.printStackTrace();
@@ -241,7 +242,33 @@ public class SSO_GLT {
     }
     
     public String getProperty(String prop){
+             
         return this.prop.getProperty(prop);
+    }
+    public void setRequestUrl(URL url){
+        try {
+            URL fileUrl=new URL(prop.getProperty("GoAnyWhere_LoginURL"));
+            this.RequestUrl=new URL(url.getProtocol(),url.getHost(),url.getPort(),fileUrl.getPath());
+        } catch (Exception e) {
+            logger.severe(e.toString());
+            e.printStackTrace();
+        }
+        
+    }
+    public String getRequestUrlTarget(){
+        try{
+            
+        
+        
+        URL fileUrl=new URL(prop.getProperty("GoAnyWhere_TargetURL"));
+        URL newUrl= new URL(RequestUrl.getProtocol(),RequestUrl.getHost(),RequestUrl.getPort(),fileUrl.getPath());
+        return newUrl.toString();
+        }
+        catch(MalformedURLException e){
+            logger.severe(e.toString());
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

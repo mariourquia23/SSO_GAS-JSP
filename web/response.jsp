@@ -15,7 +15,9 @@
 <%@page import="com.Greenlt.SSO_GAS.*"%>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%
+
     //decalaracion de varibles
     boolean respRSA = false;
     String GoAnyTargetURL = null; //"https://labsserver:4331/webclient/WebApplet.jsf";
@@ -31,20 +33,30 @@
     response.addCookie(killMyCookie);
 
     //recibir parametros
-    if (request.getParameter("token") != null && request.getParameter("token").length()>0) {
+    if (request.getParameter("token") != null && request.getParameter("token").length() > 0) {
         //Recibiendo Parametros con Tojen RSA
         String user = request.getParameter("username");
         String token = request.getParameter("token");
         textBoxInfo += String.format("\nUsuario: %s y token: %d recibidos", user, token.length());
         logger.info(String.format("Usuario: %s y token: %d, recibidos", user, token.length()));
-        SSO_GLT sso = new SSO_GLT(user, token);
+        SSO_GLT sso = new SSO_GLT(user, token, false);
+        //valida si va utilizar URL de la peticion
+        if (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") {
+            String scheme = request.getScheme();
+            String serverName = request.getServerName();
+            int serverPort = request.getServerPort();
+            String path = "";            
+            URL requestUrl = new URL(scheme,serverName,serverPort,path);
+            sso.setRequestUrl(requestUrl);
+
+        }
         respRSA = sso.autenticarRSAWSDL();
-        textBoxInfo +=(respRSA)?"\nRespuesta de WS RSA: Autenticacion Exitosa":"\nRespuesta de WS RSA: Autenticacion Fallida";
+        textBoxInfo += (respRSA) ? "\nRespuesta de WS RSA: Autenticacion Exitosa" : "\nRespuesta de WS RSA: Autenticacion Fallida";
         logger.info(String.format("Respuesta de WS RSA: %b", respRSA));
         //agregar respuesta a log resRSA
         if (respRSA) {
             String PasswordLDAP = sso.LDAPSearch();
-            textBoxInfo += (PasswordLDAP!="error")?String.format("\nContraseña de LDAP: %d", PasswordLDAP.length()):String.format("\nError al recuperar Contraseña de LDAP");
+            textBoxInfo += (PasswordLDAP != "error") ? String.format("\nContraseña de LDAP: %d", PasswordLDAP.length()) : String.format("\nError al recuperar Contraseña de LDAP");
             logger.info(String.format("Contraseña de LDAP: %d", PasswordLDAP.length()));
             //escribir el tamaño del pass a log.
             String respGoAny = sso.autenticarGoAny();
@@ -52,7 +64,8 @@
             textBoxInfo += String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny);
             logger.info(String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny));
             if (respGoAny.indexOf("200 Welcome") > -1) {
-                GoAnyTargetURL =sso.getProperty("GoAnyWhere_TargetURL")+ ";jsessionid=" + sso.getJsessionID();
+                GoAnyTargetURL = (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
+                GoAnyTargetURL += ";jsessionid=" + sso.getJsessionID();
                 //redirec = String.format("<meta http-equiv=\"refresh\" content=\"5; url=%s\" />", GoAnyTargetURL);
                 redirec = GoAnyTargetURL;
                 //crear nueva Cookie
@@ -63,21 +76,35 @@
 
             }
         }
-    } else if (request.getParameter("password") != null && request.getParameter("password").length()>0) {
+    } else if (request.getParameter("password") != null && request.getParameter("password").length() > 0) {
         //Recibiendo Parametros con Integracion por Post
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
         textBoxInfo += String.format("\nUsuario: %s y Contraseña: %d recibidos", user, pass.length());
         logger.info(String.format("Usuario: %s y Contraseña: %d, recibidos", user, pass.length()));
         SSO_GLT sso = new SSO_GLT(user, pass, true);
+        
+        //valida si va utilizar URL de la peticion
+        if (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") {
+            String scheme = request.getScheme();
+            String serverName = request.getServerName();
+            int serverPort = request.getServerPort();
+            String path = "";
+            URL requestUrl = new URL(scheme,serverName,serverPort,path);
+            sso.setRequestUrl(requestUrl);
+
+        }
         String respGoAny = sso.autenticarGoAny();
         titleInfoArea = respGoAny;
         textBoxInfo += String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny);
         logger.info(String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny));
         if (respGoAny.indexOf("200 Welcome") > -1) {
-            GoAnyTargetURL =sso.getProperty("GoAnyWhere_TargetURL")+ ";jsessionid=" + sso.getJsessionID();
+
+            GoAnyTargetURL = (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
+            GoAnyTargetURL += ";jsessionid=" + sso.getJsessionID();
             //redirec = String.format("<meta http-equiv=\"refresh\" content=\"5; url=%s\" />", GoAnyTargetURL);
             redirec = GoAnyTargetURL;
+
             //crear nueva Cookie
             Cookie jsessionid = new Cookie("JSESSIONID", sso.getJsessionID());
             jsessionid.setMaxAge(60);
@@ -188,11 +215,11 @@
             </div>
             <div>
 
-                <a href="index.xhtml">Autenticar con Token RSA</a>
+                <a href="index.html">Autenticar con Token RSAs</a>
                 <% if (redirec.length() > 1) {
                         out.print(" | <a href=\"" + GoAnyTargetURL + "\">Ir a GTA</a>");
-                    //response.sendRedirect(GoAnyTargetURL);
-%>
+                        //response.sendRedirect(GoAnyTargetURL);
+                %>
                 <script type="text/javascript">
                     window.location = "<%=GoAnyTargetURL%>";
                 </script><%
