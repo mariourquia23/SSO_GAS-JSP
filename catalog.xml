@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://74.208.202.242:8050/emulacionRSA.asmx" uri="src/conf/xml-resources/web-service-references/emulacionRSA/wsdl/74.208.202.242_8050/emulacionRSA.asmx"/>
     <system systemId="http://74.208.202.242:8050/emulacionRSA.asmx?wsdl" uri="src/conf/xml-resources/web-service-references/emulacionRSA/wsdl/74.208.202.242_8050/emulacionRSA.asmx.wsdl"/>
+    <system systemId="http://osb-pruebas.banrep.gov.co:8011/ServiciosS3/AdministradorRSA?WSDL" uri="src/conf/xml-resources/web-service-references/AdministradorRSA/wsdl/osb-pruebas.banrep.gov.co_8011/ServiciosS3/AdministradorRSA.wsdl"/>
+    <system systemId="http://osb-pruebas.banrep.gov.co:8011/ServiciosS3/AdministradorRSA?SCHEMA%2FServicioRSA%2FXSD%2FAdministradorRSAWS" uri="src/conf/xml-resources/web-service-references/AdministradorRSA/wsdl/osb-pruebas.banrep.gov.co_8011/ServiciosS3/AdministradorRSA.schema/serviciorsa/xsd/administradorrsaws.xsd"/>
 </catalog>

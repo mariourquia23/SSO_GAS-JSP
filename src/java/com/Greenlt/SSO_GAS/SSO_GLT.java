@@ -5,6 +5,8 @@
  */
 package com.Greenlt.SSO_GAS;
 
+import co.gov.banrep.s3.AdministradorRSAException_Exception;
+import co.gov.banrep.s3.RespuestaWSAutenticarUsuarioRSA;
 import com.linoma.dpa.util.GASFileUtilities;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -64,13 +66,33 @@ public class SSO_GLT {
     }
     
     public Boolean autenticarRSAWSDL() {
+        try {
+        
         //GLT
+        /*
         com.Greenlt.SSO_GAS.EmulacionRSA service = new com.Greenlt.SSO_GAS.EmulacionRSA();
         com.Greenlt.SSO_GAS.EmulacionRSASoap port = service.getEmulacionRSASoap();
         return port.autenticarRSA(Integer.parseInt(this.token), this.user);
-        //Banrep      
-
-    }
+       */
+          
+        //Banrep        
+        co.gov.banrep.s3.PeticionWSAutenticarUsuarioRSA peticion= new  co.gov.banrep.s3.PeticionWSAutenticarUsuarioRSA();
+        co.gov.banrep.s3.RespuestaWSAutenticarUsuarioRSA resp;
+        co.gov.banrep.s3.AdministradorRSAWS_Service service = new co.gov.banrep.s3.AdministradorRSAWS_Service();
+        co.gov.banrep.s3.AdministradorRSAWS port = service.getAdministradorRSAWSPort();
+        
+        peticion.setUsuario(this.user.trim());
+        peticion.setPassCode(this.token.trim());        
+        resp= port.autenticarRSA(peticion);
+        return resp.isResultado();
+        
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            logger.severe(e.toString());
+            return false;
+        }
+        
+}
 
     public String LDAPSearch() {
         try {
@@ -270,5 +292,7 @@ public class SSO_GLT {
         }
         return "";
     }
+
+    
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" targetNamespace="http://banrep.gov.co/s3" xmlns:tns="http://banrep.gov.co/s3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="AdministradorRSAException" type="tns:AdministradorRSAException"/>
+   <xs:element name="autenticarRSA" type="tns:autenticarRSA"/>
+   <xs:element name="autenticarRSAResponse" type="tns:autenticarRSAResponse"/>
+   <xs:complexType name="autenticarRSA">
+      <xs:sequence>
+         <xs:element name="datosPeticion" type="tns:peticionWSAutenticarUsuarioRSA" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="peticionWSAutenticarUsuarioRSA">
+      <xs:sequence>
+         <xs:element name="idSesion" type="xs:string" minOccurs="0"/>
+         <xs:element name="passCode" type="xs:string" minOccurs="0"/>
+         <xs:element name="usuario" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="autenticarRSAResponse">
+      <xs:sequence>
+         <xs:element name="return" type="tns:respuestaWSAutenticarUsuarioRSA" form="qualified" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="respuestaWSAutenticarUsuarioRSA">
+      <xs:complexContent>
+         <xs:extension base="tns:mensajeBase">
+            <xs:sequence>
+               <xs:element name="idSesion" type="xs:string" minOccurs="0"/>
+               <xs:element name="resultado" type="xs:boolean"/>
+               <xs:element name="usuario" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="mensajeBase">
+      <xs:sequence>
+         <xs:element name="codigoRespuesta" type="xs:int"/>
+         <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+         <xs:element name="idMensaje" type="xs:string" minOccurs="0"/>
+         <xs:element name="ipPeticion" type="xs:string" minOccurs="0"/>
+         <xs:element name="operacion" type="xs:string" minOccurs="0"/>
+         <xs:element name="origen" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="AdministradorRSAException">
+      <xs:sequence>
+         <xs:element name="message" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

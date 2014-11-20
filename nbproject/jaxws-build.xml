@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/com/Greenlt/SSO_GAS"/>
         <delete dir="${build.generated.dir}/jax-wsCache/emulacionRSA"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-emulacionRSA"/>
+    <target name="wsimport-client-AdministradorRSA" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/AdministradorRSA"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AdministradorRSA" destdir="${build.generated.dir}/jax-wsCache/AdministradorRSA" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AdministradorRSA/wsdl/osb-pruebas.banrep.gov.co_8011/ServiciosS3/AdministradorRSA.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://osb-pruebas.banrep.gov.co:8011/ServiciosS3/AdministradorRSA?WSDL" xnocompile="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/AdministradorRSA/wsdl/osb-pruebas.banrep.gov.co_8011/ServiciosS3/AdministradorRSA.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/AdministradorRSA"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/AdministradorRSA">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-AdministradorRSA" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/co/gov/banrep/s3"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/AdministradorRSA"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-emulacionRSA, wsimport-client-AdministradorRSA"/>
 </project>
