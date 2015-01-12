@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -36,7 +36,7 @@ public class AutenticarRSAResponse {
     protected boolean autenticarRSAResult;
 
     /**
-     * Obtiene el valor de la propiedad autenticarRSAResult.
+     * Gets the value of the autenticarRSAResult property.
      * 
      */
     public boolean isAutenticarRSAResult() {
@@ -44,7 +44,7 @@ public class AutenticarRSAResponse {
     }
 
     /**
-     * Define el valor de la propiedad autenticarRSAResult.
+     * Sets the value of the autenticarRSAResult property.
      * 
      */
     public void setAutenticarRSAResult(boolean value) {

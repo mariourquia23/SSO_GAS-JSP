@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para respuestaWSAutenticarUsuarioRSA complex type.
+ * <p>Java class for respuestaWSAutenticarUsuarioRSA complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="respuestaWSAutenticarUsuarioRSA">
@@ -42,7 +42,7 @@ public class RespuestaWSAutenticarUsuarioRSA
     protected String usuario;
 
     /**
-     * Obtiene el valor de la propiedad idSesion.
+     * Gets the value of the idSesion property.
      * 
      * @return
      *     possible object is
@@ -54,7 +54,7 @@ public class RespuestaWSAutenticarUsuarioRSA
     }
 
     /**
-     * Define el valor de la propiedad idSesion.
+     * Sets the value of the idSesion property.
      * 
      * @param value
      *     allowed object is
@@ -66,7 +66,7 @@ public class RespuestaWSAutenticarUsuarioRSA
     }
 
     /**
-     * Obtiene el valor de la propiedad resultado.
+     * Gets the value of the resultado property.
      * 
      */
     public boolean isResultado() {
@@ -74,7 +74,7 @@ public class RespuestaWSAutenticarUsuarioRSA
     }
 
     /**
-     * Define el valor de la propiedad resultado.
+     * Sets the value of the resultado property.
      * 
      */
     public void setResultado(boolean value) {
@@ -82,7 +82,7 @@ public class RespuestaWSAutenticarUsuarioRSA
     }
 
     /**
-     * Obtiene el valor de la propiedad usuario.
+     * Gets the value of the usuario property.
      * 
      * @return
      *     possible object is
@@ -94,7 +94,7 @@ public class RespuestaWSAutenticarUsuarioRSA
     }
 
     /**
-     * Define el valor de la propiedad usuario.
+     * Sets the value of the usuario property.
      * 
      * @param value
      *     allowed object is

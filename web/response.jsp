@@ -25,6 +25,7 @@
     String redirec = "";
     Logger logger = Logger.getLogger(this.getClass().getName());
     String titleInfoArea = "";
+    String params="";
 
     //Borrar cookie en el navegador
     Cookie killMyCookie = new Cookie("JSESSIONID", null);
@@ -33,6 +34,11 @@
     response.addCookie(killMyCookie);
 
     //recibir parametros
+    Map<String,String[]> parameters=request.getParameterMap();
+    for (Map.Entry<String,String[]> entry:parameters.entrySet()){
+        params+=" "+entry.getKey()+"\n";
+    }
+    
     if (request.getParameter("token") != null && request.getParameter("token").length() > 0) {
         //Recibiendo Parametros con Tojen RSA
         String user = request.getParameter("username");
@@ -40,6 +46,8 @@
         textBoxInfo += String.format("\nUsuario: %s y token: %d recibidos", user, token.length());
         logger.info(String.format("Usuario: %s y token: %d, recibidos", user, token.length()));
         SSO_GLT sso = new SSO_GLT(user, token, false);
+        logger.info("\n URL Recibida:\n"+request.getRequestURL());
+        logger.info("\n Parametros Recibidos:\n"+params);
         //valida si va utilizar URL de la peticion
         if (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") {
             String scheme = request.getScheme();
@@ -83,6 +91,8 @@
         textBoxInfo += String.format("\nUsuario: %s y Contraseña: %d recibidos", user, pass.length());
         logger.info(String.format("Usuario: %s y Contraseña: %d, recibidos", user, pass.length()));
         SSO_GLT sso = new SSO_GLT(user, pass, true);
+        logger.info("\n URL Recibida:\n"+request.getRequestURL());
+        logger.info("\n Parametros Recibidos:\n"+params);
         
         //valida si va utilizar URL de la peticion
         if (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") {
@@ -114,9 +124,12 @@
         }
 
     } else {
-        textBoxInfo = "No se recibieron Parametros para SSO";
-
-    }
+        textBoxInfo = "No se recibieron los parametros Correctos para SSO";
+        textBoxInfo+="\n URL Recibida:\n"+request.getRequestURL();
+        textBoxInfo+="\n Parametros Recibidos:\n"+params;
+        logger.info("\n URL Recibida:\n"+request.getRequestURL());
+        logger.info("\n Parametros Recibidos:\n"+params);
+            }
 
 %>
 <!DOCTYPE html>

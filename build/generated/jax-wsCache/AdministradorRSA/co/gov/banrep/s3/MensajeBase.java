@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para mensajeBase complex type.
+ * <p>Java class for mensajeBase complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="mensajeBase">
@@ -53,7 +53,7 @@ public class MensajeBase {
     protected String origen;
 
     /**
-     * Obtiene el valor de la propiedad codigoRespuesta.
+     * Gets the value of the codigoRespuesta property.
      * 
      */
     public int getCodigoRespuesta() {
@@ -61,7 +61,7 @@ public class MensajeBase {
     }
 
     /**
-     * Define el valor de la propiedad codigoRespuesta.
+     * Sets the value of the codigoRespuesta property.
      * 
      */
     public void setCodigoRespuesta(int value) {
@@ -69,7 +69,7 @@ public class MensajeBase {
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class MensajeBase {
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -93,7 +93,7 @@ public class MensajeBase {
     }
 
     /**
-     * Obtiene el valor de la propiedad idMensaje.
+     * Gets the value of the idMensaje property.
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class MensajeBase {
     }
 
     /**
-     * Define el valor de la propiedad idMensaje.
+     * Sets the value of the idMensaje property.
      * 
      * @param value
      *     allowed object is
@@ -117,7 +117,7 @@ public class MensajeBase {
     }
 
     /**
-     * Obtiene el valor de la propiedad ipPeticion.
+     * Gets the value of the ipPeticion property.
      * 
      * @return
      *     possible object is
@@ -129,7 +129,7 @@ public class MensajeBase {
     }
 
     /**
-     * Define el valor de la propiedad ipPeticion.
+     * Sets the value of the ipPeticion property.
      * 
      * @param value
      *     allowed object is
@@ -141,7 +141,7 @@ public class MensajeBase {
     }
 
     /**
-     * Obtiene el valor de la propiedad operacion.
+     * Gets the value of the operacion property.
      * 
      * @return
      *     possible object is
@@ -153,7 +153,7 @@ public class MensajeBase {
     }
 
     /**
-     * Define el valor de la propiedad operacion.
+     * Sets the value of the operacion property.
      * 
      * @param value
      *     allowed object is
@@ -165,7 +165,7 @@ public class MensajeBase {
     }
 
     /**
-     * Obtiene el valor de la propiedad origen.
+     * Gets the value of the origen property.
      * 
      * @return
      *     possible object is
@@ -177,7 +177,7 @@ public class MensajeBase {
     }
 
     /**
-     * Define el valor de la propiedad origen.
+     * Sets the value of the origen property.
      * 
      * @param value
      *     allowed object is
