@@ -49,7 +49,7 @@
         logger.info("\n URL Recibida:\n"+request.getRequestURL());
         logger.info("\n Parametros Recibidos:\n"+params);
         //valida si va utilizar URL de la peticion
-        if (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") {
+        if ( sso.getProperty("useRequestURL").toLowerCase() == "yes") {
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
@@ -72,7 +72,7 @@
             textBoxInfo += String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny);
             logger.info(String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny));
             if (respGoAny.indexOf("200 Welcome") > -1) {
-                GoAnyTargetURL = (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
+                GoAnyTargetURL = ( sso.getProperty("useRequestURL").toLowerCase() == "yes") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
                 GoAnyTargetURL += ";jsessionid=" + sso.getJsessionID();
                 //redirec = String.format("<meta http-equiv=\"refresh\" content=\"5; url=%s\" />", GoAnyTargetURL);
                 redirec = GoAnyTargetURL;
@@ -95,7 +95,7 @@
         logger.info("\n Parametros Recibidos:\n"+params);
         
         //valida si va utilizar URL de la peticion
-        if (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") {
+        if (sso.getProperty("useRequestURL").toLowerCase() == "yes") {
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
@@ -110,7 +110,7 @@
         logger.info(String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny));
         if (respGoAny.indexOf("200 Welcome") > -1) {
 
-            GoAnyTargetURL = (sso.getProperty("useRequestURL").length() > 0 && sso.getProperty("useRequestURL").toLowerCase() != "no") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
+            GoAnyTargetURL = (sso.getProperty("useRequestURL").toLowerCase() == "yes") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
             GoAnyTargetURL += ";jsessionid=" + sso.getJsessionID();
             //redirec = String.format("<meta http-equiv=\"refresh\" content=\"5; url=%s\" />", GoAnyTargetURL);
             redirec = GoAnyTargetURL;
@@ -136,7 +136,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>GOAnySSO</title>
+        <title>SSO_GAS_V1R5</title>
 
         <style type="text/css">
 
@@ -229,10 +229,10 @@
             <div>
 
                 <a href="index.html">Autenticar con Token RSAs</a>
-                <% if (redirec.length() > 1) {
+                <% if (redirec.length() > 1) {                    
                         out.print(" | <a href=\"" + GoAnyTargetURL + "\">Ir a GTA</a>");
                         //response.sendRedirect(GoAnyTargetURL);
-                %>
+                %>                
                 <script type="text/javascript">
                     window.location = "<%=GoAnyTargetURL%>";
                 </script><%
