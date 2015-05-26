@@ -72,21 +72,21 @@ public class SSO_GLT {
         
         //GLT
         //inicio        
-//        com.Greenlt.SSO_GAS.EmulacionRSA service = new com.Greenlt.SSO_GAS.EmulacionRSA();
-//        com.Greenlt.SSO_GAS.EmulacionRSASoap port = service.getEmulacionRSASoap();
-//        return port.autenticarRSA(Integer.parseInt(this.token), this.user);
+        com.Greenlt.SSO_GAS.EmulacionRSA service = new com.Greenlt.SSO_GAS.EmulacionRSA();
+        com.Greenlt.SSO_GAS.EmulacionRSASoap port = service.getEmulacionRSASoap();
+        return port.autenticarRSA(Integer.parseInt(this.token), this.user);
         //fin  
         //Banrep        
         //inicio
-        co.gov.banrep.s3.PeticionWSAutenticarUsuarioRSA peticion= new  co.gov.banrep.s3.PeticionWSAutenticarUsuarioRSA();
-        co.gov.banrep.s3.RespuestaWSAutenticarUsuarioRSA resp;
-        co.gov.banrep.s3.AdministradorRSAWS_Service service = new co.gov.banrep.s3.AdministradorRSAWS_Service();
-        co.gov.banrep.s3.AdministradorRSAWS port = service.getAdministradorRSAWSPort();
-        
-        peticion.setUsuario(this.user.trim());
-        peticion.setPassCode(this.token.trim());        
-        resp= port.autenticarRSA(peticion);
-        return resp.isResultado();
+//        co.gov.banrep.s3.PeticionWSAutenticarUsuarioRSA peticion= new  co.gov.banrep.s3.PeticionWSAutenticarUsuarioRSA();
+//        co.gov.banrep.s3.RespuestaWSAutenticarUsuarioRSA resp;
+//        co.gov.banrep.s3.AdministradorRSAWS_Service service = new co.gov.banrep.s3.AdministradorRSAWS_Service();
+//        co.gov.banrep.s3.AdministradorRSAWS port = service.getAdministradorRSAWSPort();
+//        
+//        peticion.setUsuario(this.user.trim());
+//        peticion.setPassCode(this.token.trim());        
+//        resp= port.autenticarRSA(peticion);
+//        return resp.isResultado();
         //fin
         } catch (Exception e) {
             System.out.println(e.toString());
