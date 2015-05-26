@@ -40,7 +40,7 @@
     }
     
     if (request.getParameter("token") != null && request.getParameter("token").length() > 0) {
-        //Recibiendo Parametros con Tojen RSA
+        //Recibiendo Parametros con Token RSA
         String user = request.getParameter("username");
         String token = request.getParameter("token");
         textBoxInfo += String.format("\nUsuario: %s y token: %d recibidos", user, token.length());
@@ -48,8 +48,8 @@
         SSO_GLT sso = new SSO_GLT(user, token, false);
         logger.info("\n URL Recibida:\n"+request.getRequestURL());
         logger.info("\n Parametros Recibidos:\n"+params);
-        //valida si va utilizar URL de la peticion
-        if ( sso.getProperty("useRequestURL").toLowerCase() == "yes") {
+        //valida si va utilizar URL de la peticion        
+        if ( sso.getProperty("useRequestURL").toLowerCase().trim().hashCode() == "yes".hashCode()) {
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
@@ -95,7 +95,7 @@
         logger.info("\n Parametros Recibidos:\n"+params);
         
         //valida si va utilizar URL de la peticion
-        if (sso.getProperty("useRequestURL").toLowerCase() == "yes") {
+        if (sso.getProperty("useRequestURL").toLowerCase().trim().hashCode() == "yes".hashCode()) {
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
@@ -136,7 +136,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SSO_GAS_V1R5</title>
+        <title>SSO_GAS_V1R7</title>
 
         <style type="text/css">
 
@@ -230,12 +230,16 @@
 
                 <a href="index.html">Autenticar con Token RSAs</a>
                 <% if (redirec.length() > 1) {                    
-                        out.print(" | <a href=\"" + GoAnyTargetURL + "\">Ir a GTA</a>");
+                        out.print(" | <a href=\"" + SSO_GLT.getUrlFile(GoAnyTargetURL) + "\">Ir a GTA</a>");
                         //response.sendRedirect(GoAnyTargetURL);
-                %>                
+                %>
+                
                 <script type="text/javascript">
                     window.location = "<%=GoAnyTargetURL%>";
-                </script><%
+                </script>
+                                
+                <%
+                RequestDispatcher d=request.getRequestDispatcher(SSO_GLT.getUrlFile(GoAnyTargetURL));
                     }
                 %>
 

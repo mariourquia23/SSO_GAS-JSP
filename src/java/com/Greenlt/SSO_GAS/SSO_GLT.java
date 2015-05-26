@@ -23,6 +23,7 @@ import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
@@ -34,6 +35,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.util.Properties;
+import java.util.logging.Level;
 /**
  *
  * @author JoseMario
@@ -69,13 +71,10 @@ public class SSO_GLT {
         try {
         
         //GLT
-        //inicio    
-        
-        /*
-        com.Greenlt.SSO_GAS.EmulacionRSA service = new com.Greenlt.SSO_GAS.EmulacionRSA();
-        com.Greenlt.SSO_GAS.EmulacionRSASoap port = service.getEmulacionRSASoap();
-        return port.autenticarRSA(Integer.parseInt(this.token), this.user);
-       */
+        //inicio        
+//        com.Greenlt.SSO_GAS.EmulacionRSA service = new com.Greenlt.SSO_GAS.EmulacionRSA();
+//        com.Greenlt.SSO_GAS.EmulacionRSASoap port = service.getEmulacionRSASoap();
+//        return port.autenticarRSA(Integer.parseInt(this.token), this.user);
         //fin  
         //Banrep        
         //inicio
@@ -152,11 +151,14 @@ public class SSO_GLT {
         try {
             //Aceptar todos los certificados
             disableSslVerification();
-            String authCredential = String.format("username=%s&password=%s", this.user, this.pass);
+            String authCredential = String.format("username=%s&password=%s", this.user, URLEncoder.encode(this.pass,"UTF-8"));
+            //authCredential= URLEncoder.encode(authCredential, "UTF-8");
             webClient =(RequestUrl==null)? new URL(getProperty("GoAnyWhere_LoginURL")):RequestUrl;//"https://labsserver:4331/login"
             conn = (HttpsURLConnection) webClient.openConnection();
             conn.setRequestMethod("POST");
+            
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            
             conn.setRequestProperty("Content-Length", ""
                     + Integer.toString(authCredential.getBytes().length));
             conn.setRequestProperty("Content-Language", "en-US");
@@ -294,6 +296,17 @@ public class SSO_GLT {
             e.printStackTrace();
         }
         return "";
+    }
+    public static String getUrlFile(String url){
+        URL myUrl;
+        try {
+            myUrl = new URL(url);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SSO_GLT.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error";
+                    
+        }
+        return myUrl.getPath();
     }
 
     
