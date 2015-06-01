@@ -18,7 +18,7 @@
 
 <%
 
-    //decalaracion de varibles
+    //decalaracion de variables
     boolean respRSA = false;
     String GoAnyTargetURL = null; //"https://labsserver:4331/webclient/WebApplet.jsf";
     String textBoxInfo = "";
@@ -26,7 +26,8 @@
     Logger logger = Logger.getLogger(this.getClass().getName());
     String titleInfoArea = "";
     String params="";
-
+    boolean useRequestURL=false;
+    
     //Borrar cookie en el navegador
     Cookie killMyCookie = new Cookie("JSESSIONID", null);
     killMyCookie.setMaxAge(0);
@@ -49,7 +50,8 @@
         logger.info("\n URL Recibida:\n"+request.getRequestURL());
         logger.info("\n Parametros Recibidos:\n"+params);
         //valida si va utilizar URL de la peticion        
-        if ( sso.getProperty("useRequestURL").toLowerCase().trim().hashCode() == "yes".hashCode()) {
+        useRequestURL=(sso.getProperty("useRequestURL").toLowerCase().trim().hashCode() == "yes".hashCode()?true:false);
+        if ( useRequestURL) {
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
@@ -72,7 +74,7 @@
             textBoxInfo += String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny);
             logger.info(String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny));
             if (respGoAny.indexOf("200 Welcome") > -1) {
-                GoAnyTargetURL = ( sso.getProperty("useRequestURL").toLowerCase() == "yes") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
+                GoAnyTargetURL = ( useRequestURL) ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
                 GoAnyTargetURL += ";jsessionid=" + sso.getJsessionID();
                 //redirec = String.format("<meta http-equiv=\"refresh\" content=\"5; url=%s\" />", GoAnyTargetURL);
                 redirec = GoAnyTargetURL;
@@ -95,7 +97,8 @@
         logger.info("\n Parametros Recibidos:\n"+params);
         
         //valida si va utilizar URL de la peticion
-        if (sso.getProperty("useRequestURL").toLowerCase().trim().hashCode() == "yes".hashCode()) {
+         useRequestURL=(sso.getProperty("useRequestURL").toLowerCase().trim().hashCode() == "yes".hashCode()?true:false);
+        if ( useRequestURL) {       
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
@@ -110,7 +113,7 @@
         logger.info(String.format("\nRespuesta de GoanyWhereServices: %s", respGoAny));
         if (respGoAny.indexOf("200 Welcome") > -1) {
 
-            GoAnyTargetURL = (sso.getProperty("useRequestURL").toLowerCase() == "yes") ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
+            GoAnyTargetURL = (useRequestURL) ? sso.getRequestUrlTarget() : sso.getProperty("GoAnyWhere_TargetURL");
             GoAnyTargetURL += ";jsessionid=" + sso.getJsessionID();
             //redirec = String.format("<meta http-equiv=\"refresh\" content=\"5; url=%s\" />", GoAnyTargetURL);
             redirec = GoAnyTargetURL;
@@ -136,7 +139,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SSO_GAS_V1R7</title>
+        <title>SSO_GAS_V1R8</title>
 
         <style type="text/css">
 
