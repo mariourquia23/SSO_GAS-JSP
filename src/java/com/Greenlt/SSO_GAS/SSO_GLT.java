@@ -248,7 +248,7 @@ public class SSO_GLT {
         InputStream input=null;        
         try {
             input=new FileInputStream(GASFileUtilities.resolveFile("userdata/greenltsso/SSOconfig.properties"));
-            //input=new FileInputStream("C:\\Users\\JoseMario\\Documents\\NetBeansProjects\\SSO_GAS\\web\\conf\\SSOconfig.properties");
+//            input=new FileInputStream("C:\\Users\\JoseMario\\Documents\\NetBeansProjects\\SSO_GAS\\web\\conf\\SSOconfig.properties");
             prop.load(input);   
              
         } catch (IOException ex) {

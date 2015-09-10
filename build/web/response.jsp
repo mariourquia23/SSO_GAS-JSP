@@ -139,7 +139,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SSO_GAS_V1R8</title>
+        <title>SSO_GAS_V1R9</title>
 
         <style type="text/css">
 
@@ -215,13 +215,29 @@
     </head>
     <body>
         <div id="panel">
+            
+           
 
-            <img src="img/logo.png" width="70" height="70" alt="logo"/>
-
+            <% if (redirec.length() > 1) {%>
+            <h2>Procesando Solicitud</h2>
+            <br />
+            <img src="img/gears2.gif" />
             <br />
             <br />
+            <br />
 
-
+             <% out.print("Espere unos segundos, sino de <a href=\"" + SSO_GLT.getUrlFile(GoAnyTargetURL) + "\">clic aquí</a>."); %>
+            
+            <!-- redireccionador JavaScript-->
+            <script type="text/javascript">
+                    window.location = "<%=GoAnyTargetURL%>";
+                </script>
+            
+            <%} else {%>
+             <img src="img/logo.png" width="70" height="70" alt="logo"/>
+             
+            <br />
+            <br />
             <div id="container">
                 <h2>INFORMACION</h2>
                 <textarea name="infoArea" id="infoArea" rows="4" cols="20" readonly="readonly" title="<%=titleInfoArea%>" ><%=textBoxInfo%>
@@ -230,27 +246,22 @@
 
             </div>
             <div>
-
+                
                 <a href="index.html">Autenticar con Token RSAs</a>
-                <% if (redirec.length() > 1) {                    
-                        out.print(" | <a href=\"" + SSO_GLT.getUrlFile(GoAnyTargetURL) + "\">Ir a GTA</a>");
+                                    
+                       <% //out.print(" | <a href=\"" + SSO_GLT.getUrlFile(GoAnyTargetURL) + "\">Ir a GTA</a>");
                         //response.sendRedirect(GoAnyTargetURL);
                 %>
                 
-                <script type="text/javascript">
-                    window.location = "<%=GoAnyTargetURL%>";
-                </script>
+                
                                 
                 <%
-                RequestDispatcher d=request.getRequestDispatcher(SSO_GLT.getUrlFile(GoAnyTargetURL));
-                    }
+                //RequestDispatcher d=request.getRequestDispatcher(SSO_GLT.getUrlFile(GoAnyTargetURL));
+                    
                 %>
 
-
             </div>
-
-
-
+                <% }%>
         </div>
         <br>
 
