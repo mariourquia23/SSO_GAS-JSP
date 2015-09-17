@@ -139,7 +139,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SSO_GAS_V1R9</title>
+        <title>SSO_GAS_V1R10</title>
 
         <style type="text/css">
 
@@ -226,11 +226,12 @@
             <br />
             <br />
 
-             <% out.print("Espere unos segundos, sino de <a href=\"" + SSO_GLT.getUrlFile(GoAnyTargetURL) + "\">clic aquí</a>."); %>
+             <% String rdirect=SSO_GLT.getUrlFile(GoAnyTargetURL);
+                out.print("Espere unos segundos, sino de <a href=\"" + rdirect + "\">clic aquí</a>."); %>
             
             <!-- redireccionador JavaScript-->
             <script type="text/javascript">
-                    window.location = "<%=GoAnyTargetURL%>";
+                    window.location = "<%=rdirect%>";//GoAnyTargetURL
                 </script>
             
             <%} else {%>
