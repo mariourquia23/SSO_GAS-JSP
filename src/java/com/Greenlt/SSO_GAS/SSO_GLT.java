@@ -45,16 +45,11 @@ public class SSO_GLT {
     private final String user;
     private final String token;
     private String pass;
-    private String JsessionID;
+    private String JsessionID;    
     private Logger logger = Logger.getLogger(this.getClass().getName());
     Properties prop=new Properties();
     private URL RequestUrl=null;
-/*
-    public SSO_GLT(String username, String conToken) {
-        this.user = username.trim();
-        this.token = conToken.trim();
-        LoadPropertiesFile();
-    }*/
+
     public SSO_GLT(String username, String passwordOToken, boolean conPassword){
         this.user=username.trim();
         if (conPassword==true){
@@ -308,7 +303,5 @@ public class SSO_GLT {
         }
         return myUrl.getPath();
     }
-
     
-
 }

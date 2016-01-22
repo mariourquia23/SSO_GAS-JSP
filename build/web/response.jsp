@@ -26,6 +26,7 @@
     Logger logger = Logger.getLogger(this.getClass().getName());
     String titleInfoArea = "";
     String params="";
+    int cookieMaxAge=-1;
     boolean useRequestURL=false;
     
     //Borrar cookie en el navegador
@@ -80,7 +81,7 @@
                 redirec = GoAnyTargetURL;
                 //crear nueva Cookie
                 Cookie jsessionid = new Cookie("JSESSIONID", sso.getJsessionID());
-                jsessionid.setMaxAge(60);
+                jsessionid.setMaxAge(cookieMaxAge);
                 jsessionid.setPath("/");
                 response.addCookie(jsessionid);
 
@@ -120,7 +121,7 @@
 
             //crear nueva Cookie
             Cookie jsessionid = new Cookie("JSESSIONID", sso.getJsessionID());
-            jsessionid.setMaxAge(60);
+            jsessionid.setMaxAge(cookieMaxAge);
             jsessionid.setPath("/");
             response.addCookie(jsessionid);
 
@@ -139,7 +140,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>SSO_GAS_V1R10</title>
+        <title>SSO_GAS_V2R0</title>
 
         <style type="text/css">
 
